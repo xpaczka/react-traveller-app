@@ -25,9 +25,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build:css": "postcss ./tailwind.config.css -o ./src/css/tailwind.css",
-    "watch:css": "postcss ./tailwind.config.css -o ./src/css/tailwind.css --watch",
-    "dev": "concurrently \"npm start\" \"npm run watch:css\""
+    "build:tailwind": "postcss ./tailwind.config.css -o ./src/css/tailwind.css",
+    "watch:tailwind": "postcss ./tailwind.config.css -o ./src/css/tailwind.css --watch",
+    "dev": "concurrently \"npm start\" \"npm run watch:tailwind\""
   },
   "eslintConfig": {
     "extends": [

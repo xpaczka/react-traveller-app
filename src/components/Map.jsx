@@ -3,7 +3,6 @@ import * as am5map from '@amcharts/amcharts5/map';
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow';
 
 import { useEffect } from 'react';
-import { customizeCountriesMapData } from '../libs/am5';
 
 const Map = props => {
   /* TODO
@@ -12,6 +11,7 @@ const Map = props => {
    -> adjust zoom levels
    -> zoom into current location and select current country
    -> show country info after clicking on map
+   -> adjust map to fit full screen
   */
 
   useEffect(() => {
@@ -24,12 +24,10 @@ const Map = props => {
       templateField: 'polygonSettings',
     });
 
-    customizeCountriesMapData(worldSeries);
-
     return () => root.dispose();
   }, []);
 
-  return <div className='w-[100%] h-[100vh]' id='mapdiv'></div>;
+  return <div className='w-full h-screen' id='mapdiv'></div>;
 };
 
 export default Map;
