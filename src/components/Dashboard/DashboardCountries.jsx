@@ -1,31 +1,31 @@
 import { useState, useEffect } from 'react';
+import useFetch from '../../hooks/use-fetch';
 
 import Checkbox from '../ui/Checkbox';
 
-const DashboardCountries = () => {
-  /* TODO
-    -> add error handling (for useEffect)
-    -> create hook for fetching data
+/* TODO
+    -> create context for countries (and move the countries fetching to the context)
+    -> exclude 'non-countries' (should be left with 197 countries)
+    -> create a country component
+    -> add click event to countries
     */
 
+const DashboardCountries = () => {
   const [countries, setCountries] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const { sendRequest, error, isLoading } = useFetch();
 
   useEffect(() => {
-    const fetchData = async () => {
-      const rawCountries = await fetch('https://restcountries.com/v3.1/all');
-      const countries = await rawCountries.json();
-      setCountries([...countries]);
-      setIsLoaded(true);
-    };
-
-    fetchData();
-  }, []);
+    sendRequest({ url: 'https://restcountries.com/v3.1/all' }, data => {
+      const sortedData = data.sort((a, b) => a.name.common > b.name.common);
+      setCountries(sortedData);
+    });
+  }, [sendRequest]);
 
   return (
     <>
-      {!isLoaded && <div>Loading data...</div>}
-      <ul className='max-h-[780px] overflow-auto'>
+      {isLoading && <p>Loading data...</p>}
+      {error && <p>{error}</p>}
+      <ul className='min-h-[480px] max-h-[780px] overflow-auto'>
         {countries.map(country => {
           return (
             <li
@@ -34,7 +34,7 @@ const DashboardCountries = () => {
             >
               <div className='flex items-center'>
                 <img
-                  className='max-w-[32px]'
+                  className='max-w-[32px] border-[2px] border-solid border-black rounded-full'
                   src={`https://hatscripts.github.io/circle-flags/flags/${country.cca2.toLowerCase()}.svg`}
                   alt={country.name.common}
                 />

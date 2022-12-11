@@ -1,19 +1,36 @@
-import { images } from '../../assets/_index';
+import { useState } from 'react';
+import icons from '../../assets/icons/_index';
 
 import Card from '../ui/Card';
 import DashboardCountries from './DashboardCountries';
 import DashboardButton from './DashboardButton';
+import DashboardHamburger from './DashboardHamburger';
+import DashboardScorebard from './DashboardScoreboard';
+import DashboardSummary from './DashboardSummary';
 
 const Dashboard = () => {
+  const [dashboardOpen, setDashboardOpen] = useState(true);
+  const [currentTab, setCurrentTab] = useState(0);
+
+  const toggleDashboardHandler = value => setDashboardOpen(value);
+  const tabChangeHandler = value => setCurrentTab(value);
+
   return (
-    <Card className='max-w-[50%] absolute right-[40px] top-[40px] bg-[rgba(255,255,255,0.8)] px-[40px] py-[20px]'>
-      <div className='w-full flex gap-[20px] mb-[20px]'>
-        <DashboardButton image={images.flag} text='Countries' />
-        <DashboardButton image={images.globe} text='Summary' />
-        <DashboardButton image={images.star} text='Scoreboard' />
-      </div>
-      <DashboardCountries />
-    </Card>
+    <>
+      <DashboardHamburger className='absolute right-[80px] top-[60px]' onMenuAction={toggleDashboardHandler} />
+      {dashboardOpen && (
+        <Card className='min-w-[320px] max-w-[50%] absolute right-[40px] top-[40px] bg-[rgba(255,255,255,0.8)] px-[40px] pt-[60px] pb-[20px]'>
+          <div className='w-full flex gap-[20px] mb-[20px]'>
+            <DashboardButton image={icons.flag} text='Countries' value={0} onTabChange={tabChangeHandler} />
+            <DashboardButton image={icons.globe} text='Summary' value={1} onTabChange={tabChangeHandler} />
+            <DashboardButton image={icons.star} text='Scoreboard' value={2} onTabChange={tabChangeHandler} />
+          </div>
+          {currentTab === 0 && <DashboardCountries />}
+          {currentTab === 1 && <DashboardSummary />}
+          {currentTab === 2 && <DashboardScorebard />}
+        </Card>
+      )}
+    </>
   );
 };
 

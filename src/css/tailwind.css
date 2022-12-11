@@ -503,6 +503,21 @@ video {
 .top-\[40px\] {
   top: 40px;
 }
+.right-0 {
+  right: 0px;
+}
+.top-\[20px\] {
+  top: 20px;
+}
+.right-\[80px\] {
+  right: 80px;
+}
+.top-\[60px\] {
+  top: 60px;
+}
+.z-\[999\] {
+  z-index: 999;
+}
 .mb-\[20px\] {
   margin-bottom: 20px;
 }
@@ -521,14 +536,41 @@ video {
 .h-screen {
   height: 100vh;
 }
+.h-\[20px\] {
+  height: 20px;
+}
+.h-\[24px\] {
+  height: 24px;
+}
+.h-full {
+  height: 100%;
+}
 .max-h-\[20px\] {
   max-height: 20px;
 }
 .max-h-\[780px\] {
   max-height: 780px;
 }
+.max-h-\[32px\] {
+  max-height: 32px;
+}
+.max-h-full {
+  max-height: 100%;
+}
+.min-h-\[480px\] {
+  min-height: 480px;
+}
 .w-full {
   width: 100%;
+}
+.w-\[20px\] {
+  width: 20px;
+}
+.w-\[24px\] {
+  width: 24px;
+}
+.min-w-\[320px\] {
+  min-width: 320px;
 }
 .max-w-\[50\%\] {
   max-width: 50%;
@@ -538,6 +580,9 @@ video {
 }
 .max-w-\[32px\] {
   max-width: 32px;
+}
+.max-w-\[24px\] {
+  max-width: 24px;
 }
 .flex-1 {
   flex: 1 1 0%;
@@ -563,6 +608,15 @@ video {
 .rounded-\[8px\] {
   border-radius: 8px;
 }
+.rounded-full {
+  border-radius: 9999px;
+}
+.border {
+  border-width: 1px;
+}
+.border-\[2px\] {
+  border-width: 2px;
+}
 .border-b {
   border-bottom-width: 1px;
 }
@@ -572,12 +626,34 @@ video {
 .border-\[rgba\(0\2c 0\2c 0\2c 0\.2\)\] {
   border-color: rgba(0,0,0,0.2);
 }
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
 .bg-\[rgba\(255\2c 255\2c 255\2c 0\.8\)\] {
   background-color: rgba(255,255,255,0.8);
 }
 .bg-\[\#ff971a\] {
   --tw-bg-opacity: 1;
   background-color: rgb(255 151 26 / var(--tw-bg-opacity));
+}
+.bg-\[\#F787C4\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 135 196 / var(--tw-bg-opacity));
+}
+.bg-\[\#f787c4\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(247 135 196 / var(--tw-bg-opacity));
+}
+.bg-\[\#d5ae07\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(213 174 7 / var(--tw-bg-opacity));
+}
+.object-contain {
+  object-fit: contain;
+}
+.p-\[4px\] {
+  padding: 4px;
 }
 .px-\[40px\] {
   padding-left: 40px;
@@ -603,6 +679,15 @@ video {
 }
 .pb-\[15px\] {
   padding-bottom: 15px;
+}
+.pb-\[20px\] {
+  padding-bottom: 20px;
+}
+.pt-\[50px\] {
+  padding-top: 50px;
+}
+.pt-\[60px\] {
+  padding-top: 60px;
 }
 .text-center {
   text-align: center;
