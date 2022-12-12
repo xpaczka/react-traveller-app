@@ -3,15 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
+import { CountriesProvider } from './context/countries-context';
+
 /* TODO
  -> choose better color palette
  -> add purge css
- -> create context
+ -> move countries list do databse / develope own api
 */
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <CountriesProvider>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </CountriesProvider>
 );
