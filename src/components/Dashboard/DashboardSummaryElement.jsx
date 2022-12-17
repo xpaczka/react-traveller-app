@@ -1,9 +1,10 @@
-/* TODO
-    -> refactor code
-*/
+import { useContext } from 'react';
+import CountriesContext from '../../context/countries-context';
 
 const DashboardSummaryElement = props => {
-  const percentageValue = ((props.value / props.max) * 100).toFixed(0);
+  const { visitedCountries } = useContext(CountriesContext);
+  const value = visitedCountries.filter(country => country.continent === props.region).length;
+  const percentageValue = ((value / props.max) * 100).toFixed(0);
 
   return (
     <div className='w-[50%] px-[5px] flex flex-col items-center'>
@@ -30,7 +31,7 @@ const DashboardSummaryElement = props => {
       </div>
       <p className='text-center text-[22px] translate-y-[-15px]'>{props.region}</p>
       <p className='translate-y-[-15px]'>
-        {props.value} / {props.max}
+        {value} / {props.max}
       </p>
     </div>
   );

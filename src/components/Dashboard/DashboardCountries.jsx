@@ -11,7 +11,7 @@ const DashboardCountries = () => {
   const countriesCtx = useContext(CountriesContext);
 
   return (
-    <ul className='min-h-[480px] max-h-[780px] overflow-auto'>
+    <ul className='h-full overflow-auto'>
       {countriesCtx.countries.map(country => (
         <DashboardCountriesElement key={country.cca2} name={country.name.common} code={country.cca2} />
       ))}

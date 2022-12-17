@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
-import { CountriesProvider } from './context/countries-context';
+import CountriesProvider from './context/CountriesProvider';
 
 /* TODO
  -> choose better color palette
