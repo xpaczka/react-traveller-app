@@ -7,7 +7,7 @@ const DashboardSummary = () => {
   const continents = Object.entries(countriesCtx.continents);
 
   return (
-    <div className='min-h-[480px] max-h-[780px] overflow-auto flex flex-wrap items-start w-full'>
+    <div className='h-full overflow-auto flex flex-wrap items-start'>
       {continents.map(continent => (
         <DashboardSummaryElement
           key={continent[0]}
