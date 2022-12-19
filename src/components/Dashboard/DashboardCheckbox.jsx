@@ -1,12 +1,16 @@
 import images from '../../assets/icons/_index';
 
 const DashboardCheckbox = props => {
+  const containerClasses = `h-[24px] w-[24px] border border-solid border-black rounded-full relative flex items-center justify-center ${
+    props.checked && 'bg-[#026906] text-white'
+  }`;
+  const checkbocClasses = `h-[16px] w-[16px] ${props.checked ? 'block' : 'hidden'}`;
+
   return (
-    <div className='checkbox'>
-      <div className={props.checked ? 'checkbox-trigger is-checked' : 'checkbox-trigger'}>
-        <img src={images.check} alt='Checkmark' />
+    <div className='relative'>
+      <div className={containerClasses}>
+        <img className={checkbocClasses} src={images.check} alt='Checkmark' />
       </div>
-      <input type='checkbox' readOnly className='checkbox-input' checked={props.checked} />
     </div>
   );
 };

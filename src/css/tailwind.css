@@ -512,6 +512,12 @@ video {
 .top-\[40px\] {
   top: 40px;
 }
+.left-0 {
+  left: 0px;
+}
+.top-0 {
+  top: 0px;
+}
 .left-1\/2 {
   left: 50%;
 }
@@ -520,6 +526,9 @@ video {
 }
 .z-\[999\] {
   z-index: 999;
+}
+.z-10 {
+  z-index: 10;
 }
 .mb-\[20px\] {
   margin-bottom: 20px;
@@ -530,17 +539,32 @@ video {
 .ml-\[20px\] {
   margin-left: 20px;
 }
+.mb-\[10px\] {
+  margin-bottom: 10px;
+}
+.block {
+  display: block;
+}
 .flex {
   display: flex;
+}
+.hidden {
+  display: none;
 }
 .h-\[90vh\] {
   height: 90vh;
 }
-.h-full {
-  height: 100%;
-}
 .h-\[24px\] {
   height: 24px;
+}
+.h-\[16px\] {
+  height: 16px;
+}
+.h-\[calc\(100\%-70px\)\] {
+  height: calc(100% - 70px);
+}
+.h-full {
+  height: 100%;
 }
 .h-\[180px\] {
   height: 180px;
@@ -556,6 +580,12 @@ video {
 }
 .w-\[24px\] {
   width: 24px;
+}
+.w-\[16px\] {
+  width: 16px;
+}
+.w-\[90\%\] {
+  width: 90%;
 }
 .w-\[50\%\] {
   width: 50%;
@@ -630,6 +660,12 @@ video {
 .rounded-full {
   border-radius: 9999px;
 }
+.rounded-\[12px\] {
+  border-radius: 12px;
+}
+.border {
+  border-width: 1px;
+}
 .border-\[2px\] {
   border-width: 2px;
 }
@@ -639,12 +675,12 @@ video {
 .border-solid {
   border-style: solid;
 }
-.border-\[rgba\(0\2c 0\2c 0\2c 0\.2\)\] {
-  border-color: rgba(0,0,0,0.2);
-}
 .border-black {
   --tw-border-opacity: 1;
   border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+.border-\[rgba\(0\2c 0\2c 0\2c 0\.2\)\] {
+  border-color: rgba(0,0,0,0.2);
 }
 .bg-\[rgba\(255\2c 255\2c 255\2c 0\.8\)\] {
   background-color: rgba(255,255,255,0.8);
@@ -653,9 +689,21 @@ video {
   --tw-bg-opacity: 1;
   background-color: rgb(255 151 26 / var(--tw-bg-opacity));
 }
+.bg-\[\#026906\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(2 105 6 / var(--tw-bg-opacity));
+}
 .bg-\[\#A7A7F4\] {
   --tw-bg-opacity: 1;
   background-color: rgb(167 167 244 / var(--tw-bg-opacity));
+}
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+.bg-\[\#78bec7\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(120 190 199 / var(--tw-bg-opacity));
 }
 .object-contain {
   object-fit: contain;
@@ -699,6 +747,9 @@ video {
 .text-\[20px\] {
   font-size: 20px;
 }
+.text-\[14px\] {
+  font-size: 14px;
+}
 .text-\[28px\] {
   font-size: 28px;
 }
@@ -707,6 +758,10 @@ video {
 }
 .font-bold {
   font-weight: 700;
+}
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 .shadow-\[0_0_6px_rgba\(0\2c 0\2c 0\2c 0\.5\)\] {
   --tw-shadow: 0 0 6px rgba(0,0,0,0.5);
