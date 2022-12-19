@@ -15,7 +15,7 @@ import DashboardSummary from './DashboardSummary';
 
 const Dashboard = () => {
   const [dashboardOpen, setDashboardOpen] = useState(true);
-  const [currentTab, setCurrentTab] = useState(1);
+  const [currentTab, setCurrentTab] = useState(0);
 
   const toggleDashboardHandler = value => setDashboardOpen(value);
   const tabChangeHandler = value => setCurrentTab(value);

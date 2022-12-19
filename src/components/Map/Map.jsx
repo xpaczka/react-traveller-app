@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
 import * as am5 from '@amcharts/amcharts5';
 import * as am5map from '@amcharts/amcharts5/map';
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow';
+import CountriesContext from '../../context/countries-context';
 
 /* TODO
    -> add click and hover events
@@ -13,7 +14,9 @@ import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow';
    -> adjust map to fit full screen
   */
 
-const Map = props => {
+const Map = () => {
+  const { visitedCountries } = useContext(CountriesContext);
+
   useEffect(() => {
     const root = am5.Root.new('mapdiv');
     const chart = root.container.children.push(am5map.MapChart.new(root, { projection: am5map.geoNaturalEarth1() }));
@@ -25,7 +28,7 @@ const Map = props => {
     });
 
     return () => root.dispose();
-  }, []);
+  }, [visitedCountries]);
 
   return <div className='w-full h-screen' id='mapdiv'></div>;
 };
