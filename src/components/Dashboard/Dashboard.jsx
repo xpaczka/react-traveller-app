@@ -15,7 +15,7 @@ import DashboardSummary from './DashboardSummary';
 
 const Dashboard = () => {
   const [dashboardOpen, setDashboardOpen] = useState(true);
-  const [currentTab, setCurrentTab] = useState(0);
+  const [currentTab, setCurrentTab] = useState(2);
 
   const toggleDashboardHandler = value => setDashboardOpen(value);
   const tabChangeHandler = value => setCurrentTab(value);
@@ -24,7 +24,7 @@ const Dashboard = () => {
     <>
       <DashboardHamburger className='absolute right-[80px] top-[60px]' onMenuAction={toggleDashboardHandler} />
       {dashboardOpen && (
-        <Card className='min-w-[320px] max-w-[50%] h-[90vh] overflow-hidden absolute right-[40px] top-[40px] bg-[rgba(255,255,255,0.8)] px-[40px] pt-[70px] pb-[20px]'>
+        <Card className='min-w-[320px] max-w-1/2 h-[90vh] overflow-hidden absolute right-[40px] top-[40px] bg-[rgba(255,255,255,0.8)] px-[40px] pt-[70px] pb-[20px]'>
           <div className='w-full flex gap-[20px] mb-[20px]'>
             <DashboardButton image={icons.flag} text='Countries' value={0} onTabChange={tabChangeHandler} />
             <DashboardButton image={icons.globe} text='Summary' value={1} onTabChange={tabChangeHandler} />

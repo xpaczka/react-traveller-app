@@ -2,13 +2,14 @@ import { useContext } from 'react';
 import CountriesContext from '../../context/countries-context';
 import DashboardSummaryBar from './DashboardSummaryBar';
 import DashboardSummaryElement from './DashboardSummaryElement';
+import DashboardPanel from './DashboardPanel';
 
 const DashboardSummary = () => {
   const { continents } = useContext(CountriesContext);
   const continentsElements = Object.entries(continents);
 
   return (
-    <div className='h-[calc(100%-70px)] overflow-auto relative'>
+    <DashboardPanel className='relative'>
       <DashboardSummaryBar />
       <div className='flex flex-wrap items-start'>
         {continentsElements.map(continent => (
@@ -20,7 +21,7 @@ const DashboardSummary = () => {
           />
         ))}
       </div>
-    </div>
+    </DashboardPanel>
   );
 };
 

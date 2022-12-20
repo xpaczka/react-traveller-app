@@ -9,3 +9,10 @@ export const getContinentsLength = countries => {
 
   return countedContinents;
 };
+
+export const getCountriesCount = continents => {
+  const continentsElement = Object.entries(continents);
+  if (!continentsElement.length) return 0;
+
+  return continentsElement.map(continent => parseInt(continent[1])).reduce((a, b) => a + b);
+};

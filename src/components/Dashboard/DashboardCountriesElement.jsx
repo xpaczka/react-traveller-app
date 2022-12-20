@@ -30,7 +30,7 @@ const DashboardCountriesElement = ({ name, code }) => {
   } transition-colors`;
 
   return (
-    <li onClick={checkCountryHandler} className={elementClassname}>
+    <div onClick={checkCountryHandler} className={elementClassname}>
       <div className='flex items-center'>
         <img
           className='max-w-[32px] border-[2px] border-solid border-black rounded-full'
@@ -40,7 +40,7 @@ const DashboardCountriesElement = ({ name, code }) => {
         <p className='ml-[20px]'>{name}</p>
       </div>
       <DashboardCheckbox checked={checked} />
-    </li>
+    </div>
   );
 };
 

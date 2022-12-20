@@ -7,7 +7,7 @@ const DashboardSummaryElement = props => {
   const percentageValue = ((value / props.max) * 100).toFixed(0);
 
   return (
-    <div className='w-[50%] px-[5px] flex flex-col items-center'>
+    <div className='w-1/2 px-[5px] flex flex-col items-center'>
       <div className='relative'>
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='-8 -8 48 48' className='rotate-[-90deg] h-[180px]'>
           <circle cx='16' cy='16' r='16' style={{ fill: 'none', stroke: '#000', strokeWidth: '3' }} />
