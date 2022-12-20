@@ -9,6 +9,8 @@ const CountriesContext = createContext({
   countries: [],
   continents: {},
   visitedCountries: [],
+  countriesCount: 0,
+  visitedCountriesCount: 0,
   addCountry: () => {},
   removeCountry: () => {},
 });

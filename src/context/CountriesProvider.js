@@ -2,11 +2,13 @@ import { useState, useEffect, useReducer } from 'react';
 import useFetch from '../hooks/use-fetch';
 
 import CountriesContext from './countries-context';
-import { getContinentsLength } from '../libs/countries';
+import { getContinentsLength, getCountriesCount } from '../libs/countries';
 
 const defaultCountriesState = {
   countries: [],
   continents: {},
+  countriesCount: 0,
+  visitedCountriesCount: 0,
   visitedCountries: [],
 };
 
@@ -45,6 +47,8 @@ const CountriesProvider = props => {
   const [countriesState, dispatchCountriesAction] = useReducer(visitedReducer, defaultCountriesState);
   const { sendRequest } = useFetch();
 
+  const continents = getContinentsLength(countries);
+
   useEffect(() => {
     sendRequest({ url: 'https://restcountries.com/v3.1/all' }, data => {
       const sortedData = data.sort((a, b) => a.name.common > b.name.common);
@@ -57,8 +61,10 @@ const CountriesProvider = props => {
 
   const contextValue = {
     countries: countries,
-    continents: getContinentsLength(countries),
+    continents: continents,
     visitedCountries: countriesState.visitedCountries,
+    countriesCount: getCountriesCount(continents),
+    visitedCountriesCount: countriesState.visitedCountries.length,
     addCountry: addCountryHandler,
     removeCountry: removeCountryHandler,
   };

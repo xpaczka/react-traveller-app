@@ -7,7 +7,6 @@ import CountriesProvider from './context/CountriesProvider';
 
 /* TODO
  -> choose better color palette
- -> add purge css
  -> move countries list do databse / develope own api
 */
 
