@@ -524,6 +524,9 @@ video {
 .top-1\/2 {
   top: 50%;
 }
+.z-\[100\] {
+  z-index: 100;
+}
 .z-\[999\] {
   z-index: 999;
 }
@@ -533,6 +536,9 @@ video {
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+.mr-\[20px\] {
+  margin-right: 20px;
 }
 .mb-\[20px\] {
   margin-bottom: 20px;
@@ -733,6 +739,10 @@ video {
 .bg-\[lightblue\] {
   --tw-bg-opacity: 1;
   background-color: rgb(173 216 230 / var(--tw-bg-opacity));
+}
+.bg-\[red\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 0 0 / var(--tw-bg-opacity));
 }
 .bg-\[\#2d5bd0\] {
   --tw-bg-opacity: 1;
