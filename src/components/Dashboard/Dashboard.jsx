@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import icons from '../../assets/icons/_index';
 
 import Card from '../ui/Card';
@@ -7,6 +7,8 @@ import DashboardButton from './DashboardButton';
 import DashboardHamburger from './DashboardHamburger';
 import DashboardScorebard from './DashboardScoreboard';
 import DashboardSummary from './DashboardSummary';
+import DashboardLogout from './DashboardLogout';
+import AuthContext from '../../context/auth-context';
 
 /* TODO
   -> deal with moving of dashboard panels (set the same width for every panel)
@@ -14,15 +16,19 @@ import DashboardSummary from './DashboardSummary';
 */
 
 const Dashboard = () => {
+  const { logout } = useContext(AuthContext);
   const [dashboardOpen, setDashboardOpen] = useState(true);
-  const [currentTab, setCurrentTab] = useState(2);
+  const [currentTab, setCurrentTab] = useState(0);
 
   const toggleDashboardHandler = value => setDashboardOpen(value);
   const tabChangeHandler = value => setCurrentTab(value);
 
   return (
     <>
-      <DashboardHamburger className='absolute right-[80px] top-[60px]' onMenuAction={toggleDashboardHandler} />
+      <div className='flex absolute right-[80px] top-[60px] z-[100]'>
+        <DashboardLogout onLogout={logout} className='mr-[20px]' />
+        <DashboardHamburger onMenuAction={toggleDashboardHandler} />
+      </div>
       {dashboardOpen && (
         <Card className='min-w-[320px] max-w-1/2 h-[90vh] overflow-hidden absolute right-[40px] top-[40px] bg-[rgba(255,255,255,0.8)] px-[40px] pt-[70px] pb-[20px]'>
           <div className='w-full flex gap-[20px] mb-[20px]'>
