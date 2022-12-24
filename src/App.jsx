@@ -1,12 +1,13 @@
-import Map from './components/Map/Map';
-import Dashboard from './components/Dashboard/Dashboard';
+import AppPage from './pages/AppPage';
+import { Route, Routes } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
 
 const App = () => {
   return (
-    <>
-      <Map />
-      <Dashboard />
-    </>
+    <Routes>
+      <Route path='/dashboard' element={<AppPage />} />
+      <Route path='/' element={<LoginPage />} />
+    </Routes>
   );
 };
 
