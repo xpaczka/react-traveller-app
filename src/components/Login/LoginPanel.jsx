@@ -1,14 +1,38 @@
 import { useRef } from 'react';
-import useFetch from '../../hooks/use-fetch';
+import { useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
+import { useContext } from 'react';
+import AuthContext from '../../context/auth-context';
+
+// Firebase authentication
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase';
 
 const LoginPanel = () => {
+  const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { sendRequest } = useFetch();
 
   const formSubmitHandler = e => {
     e.preventDefault();
+
+    // Firebase authentication
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(userCredential => {
+        const user = userCredential.user;
+        authCtx.login(user);
+
+        navigate('/dashboard');
+      })
+      .catch(error => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(`${errorCode}: ${errorMessage}`);
+      });
   };
 
   return (

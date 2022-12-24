@@ -1,8 +1,8 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer, useContext } from 'react';
 import useFetch from '../hooks/use-fetch';
 
 import CountriesContext from './countries-context';
-import { getContinentsLength, getCountriesCount } from '../libs/countries';
+import AuthContext from './auth-context';
 
 const defaultCountriesState = {
   countries: [],
@@ -12,13 +12,19 @@ const defaultCountriesState = {
   visitedCountries: [],
 };
 
-if (localStorage.getItem('visited')) {
-  defaultCountriesState.visitedCountries = JSON.parse(localStorage.getItem('visited'));
-}
+const getContinentsLength = countries => {
+  const countedContinents = {};
+  const continentsData = countries.map(country => country.continents[0]);
+
+  continentsData.forEach(continent => {
+    if (continent === 'Antarctica') return;
+    countedContinents[continent] = countedContinents[continent] ? countedContinents[continent] + 1 : 1;
+  });
+
+  return countedContinents;
+};
 
 const visitedReducer = (state, action) => {
-  console.log(state.visitedCountries);
-
   switch (action.type) {
     case 'ADD':
       const countryVisited = state.visitedCountries.some(country => country.name === action.item.name);
@@ -43,11 +49,12 @@ const visitedReducer = (state, action) => {
 };
 
 const CountriesProvider = props => {
+  const { currentUser } = useContext(AuthContext);
+
   const [countries, setCountries] = useState([]);
   const [countriesState, dispatchCountriesAction] = useReducer(visitedReducer, defaultCountriesState);
-  const { sendRequest } = useFetch();
 
-  const continents = getContinentsLength(countries);
+  const { sendRequest } = useFetch();
 
   useEffect(() => {
     sendRequest({ url: 'https://restcountries.com/v3.1/all' }, data => {
@@ -61,10 +68,10 @@ const CountriesProvider = props => {
 
   const contextValue = {
     countries: countries,
-    continents: continents,
-    visitedCountries: countriesState.visitedCountries,
-    countriesCount: getCountriesCount(continents),
-    visitedCountriesCount: countriesState.visitedCountries.length,
+    continents: getContinentsLength(countries),
+    visitedCountries: currentUser?.visitedCountries ?? [],
+    countriesCount: countries.length,
+    visitedCountriesCount: currentUser?.visitedCountries.length ?? 0,
     addCountry: addCountryHandler,
     removeCountry: removeCountryHandler,
   };
