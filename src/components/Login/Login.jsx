@@ -7,20 +7,11 @@ const Login = () => {
   const [loginPanel, setLoginPanel] = useState(true);
   const panelChangeHandler = () => setLoginPanel(!loginPanel);
 
-  const informationContainer = loginPanel ? (
+  const informationContainer = (
     <>
-      <p>Don't have an account yet?</p>
+      <p>{loginPanel ? `Don't have an account yet?` : `Already registered?`}</p>
       <p onClick={panelChangeHandler} className='font-medium cursor-pointer'>
-        {' '}
-        Register
-      </p>
-    </>
-  ) : (
-    <>
-      <p>Already registered?</p>
-      <p onClick={panelChangeHandler} className='font-medium cursor-pointer'>
-        {' '}
-        Login
+        {loginPanel ? ' Register' : 'Login'}
       </p>
     </>
   );
