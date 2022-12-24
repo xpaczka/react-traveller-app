@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 
 import CountriesProvider from './context/CountriesProvider';
+import { BrowserRouter } from 'react-router-dom';
 
 /* TODO
  -> choose better color palette
@@ -13,8 +14,10 @@ import CountriesProvider from './context/CountriesProvider';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <CountriesProvider>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <BrowserRouter>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </BrowserRouter>
   </CountriesProvider>
 );
