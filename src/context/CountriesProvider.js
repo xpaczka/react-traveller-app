@@ -33,18 +33,20 @@ const CountriesProvider = props => {
       const data = await fetchResponse.json();
       const userInfo = Object.values(data);
 
-      const currentUserIndex = userInfo.findIndex(user => user.userId === currentUser.userId);
-      const visitedCountriesState = userInfo[currentUserIndex].visitedCountries;
+      if (currentUser) {
+        const currentUserIndex = userInfo.findIndex(user => user.userId === currentUser.userId);
+        const visitedCountriesState = userInfo[currentUserIndex].visitedCountries;
 
-      setCurrentState({
-        currentUserIndex: currentUserIndex,
-        visitedCountriesState: visitedCountriesState ? [...visitedCountriesState] : [],
-      });
+        setCurrentState({
+          currentUserIndex: currentUserIndex,
+          visitedCountriesState: visitedCountriesState ? [...visitedCountriesState] : [],
+        });
 
-      setVisitedCountries(visitedCountriesState);
+        setVisitedCountries(visitedCountriesState);
+      }
     };
     fetchData();
-  }, [currentUser.userId]);
+  }, [currentUser]);
 
   useEffect(() => {
     sendRequest({ url: 'https://restcountries.com/v3.1/all' }, data => {
