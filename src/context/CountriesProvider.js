@@ -35,10 +35,12 @@ const CountriesProvider = props => {
 
       if (currentUser) {
         const currentUserIndex = userInfo.findIndex(user => user.userId === currentUser.userId);
+        const databaseIndex = Object.keys(data)[currentUserIndex];
+
         const visitedCountriesState = userInfo[currentUserIndex].visitedCountries;
 
         setCurrentState({
-          currentUserIndex: currentUserIndex,
+          currentUserIndex: databaseIndex,
           visitedCountriesState: visitedCountriesState ? [...visitedCountriesState] : [],
         });
 

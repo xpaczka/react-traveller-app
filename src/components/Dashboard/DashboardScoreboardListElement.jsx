@@ -6,10 +6,10 @@ const DashboardScoreboardListElement = ({ rank, name, country, countriesCount })
   const [flagCode, setFlagCode] = useState('pl');
 
   useEffect(() => {
-    const countryIndex = countries.findIndex(country => country.name.common === country);
+    const countryNames = countries.map(country => country.name.common);
+    const countryIndex = countryNames.findIndex(name => name === country);
     const code = countries[countryIndex]?.cca2.toLowerCase();
 
-    if (!code) return;
     setFlagCode(code);
   }, [country, countries]);
 

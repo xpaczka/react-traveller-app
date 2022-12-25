@@ -9,7 +9,7 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path='/' index element={<LoginPage />} />
+      {!authCtx.isLoggedIn && <Route path='/' index element={<LoginPage />} />}
       {authCtx.isLoggedIn && <Route path='/dashboard' element={<AppPage />} />}
       <Route
         path='*'

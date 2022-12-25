@@ -18,7 +18,7 @@ const Login = () => {
 
   return (
     <Card className='max-w-[420px] w-full mx-auto bg-[lightblue] p-[40px]'>
-      <h1 className='text-center font-bold text-[30px] mb-[30px]'>Login</h1>
+      <h1 className='text-center font-bold text-[30px] mb-[30px]'>{loginPanel ? 'Login' : 'Register'}</h1>
       {loginPanel ? <LoginPanel /> : <RegisterPanel />}
       <div className='text-center'>{informationContainer}</div>
     </Card>

@@ -10,11 +10,6 @@ import DashboardSummary from './DashboardSummary';
 import DashboardLogout from './DashboardLogout';
 import AuthContext from '../../context/auth-context';
 
-/* TODO
-  -> deal with moving of dashboard panels (set the same width for every panel)
-  -> fix dashboard panels scrolling issue
-*/
-
 const Dashboard = () => {
   const { logout } = useContext(AuthContext);
   const [dashboardOpen, setDashboardOpen] = useState(true);
@@ -30,7 +25,7 @@ const Dashboard = () => {
         <DashboardHamburger onMenuAction={toggleDashboardHandler} />
       </div>
       {dashboardOpen && (
-        <Card className='min-w-[320px] max-w-1/2 h-[90vh] overflow-hidden absolute right-[40px] top-[40px] bg-[rgba(255,255,255,0.8)] px-[40px] pt-[70px] pb-[20px]'>
+        <Card className='min-w-[320px] w-[640px] h-[90vh] overflow-hidden absolute right-[40px] top-[40px] bg-[rgba(255,255,255,0.8)] px-[40px] pt-[70px] pb-[20px]'>
           <div className='w-full flex gap-[20px] mb-[20px]'>
             <DashboardButton image={icons.flag} text='Countries' value={0} onTabChange={tabChangeHandler} />
             <DashboardButton image={icons.globe} text='Summary' value={1} onTabChange={tabChangeHandler} />
