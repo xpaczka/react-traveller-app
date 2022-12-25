@@ -7,7 +7,7 @@ const DashboardCountriesElement = ({ name, code }) => {
   const { countries, visitedCountries, addCountry, removeCountry } = useContext(CountriesContext);
 
   useEffect(() => {
-    if (visitedCountries.some(country => country.name === name)) {
+    if (visitedCountries.length && visitedCountries.some(country => country.name === name)) {
       setChecked(true);
     }
   }, [visitedCountries, name]);
