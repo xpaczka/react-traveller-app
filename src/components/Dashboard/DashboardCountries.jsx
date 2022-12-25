@@ -1,5 +1,10 @@
+// React import
 import { useContext } from 'react';
+
+// Context import
 import CountriesContext from '../../context/countries-context';
+
+// Components import
 import DashboardCountriesElement from './DashboardCountriesElement';
 import DashboardPanel from './DashboardPanel';
 

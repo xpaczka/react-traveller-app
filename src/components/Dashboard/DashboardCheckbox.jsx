@@ -1,3 +1,4 @@
+// Assets import
 import images from '../../assets/icons/_index';
 
 const DashboardCheckbox = props => {

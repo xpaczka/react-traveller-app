@@ -1,5 +1,10 @@
+// Hooks, React import
 import { useContext, useEffect, useState } from 'react';
+
+// Context import
 import CountriesContext from '../../context/countries-context';
+
+// Components import
 import DashboardCheckbox from './DashboardCheckbox';
 
 const DashboardCountriesElement = ({ name, code }) => {

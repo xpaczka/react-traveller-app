@@ -1,4 +1,7 @@
+// Hooks, React import
 import { useState } from 'react';
+
+// Assets import
 import icons from '../../assets/icons/_index';
 
 const DashboardHamburger = props => {
@@ -10,7 +13,12 @@ const DashboardHamburger = props => {
   };
 
   return (
-    <div className={`p-[4px] cursor-pointer z-[999] ${props.className}`} onClick={toggleMenuHandler}>
+    <div
+      className={`p-[4px] w-[40px] h-[40px] rounded-full cursor-pointer z-[999] flex items-center justify-center ${
+        props.className ?? ''
+      }`}
+      onClick={toggleMenuHandler}
+    >
       <img
         src={menuActive ? icons.bars : icons.xmark}
         alt='Dashboard Hamburger'

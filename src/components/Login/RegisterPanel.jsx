@@ -1,41 +1,25 @@
+// Hooks, React import
 import { useContext, useEffect, useRef, createRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../ui/Button';
-import Input from '../ui/Input';
+
+// Context import
 import CountriesContext from '../../context/countries-context';
 import AuthContext from '../../context/auth-context';
 
-// Firebase authentication
+// Components import
+import Button from '../ui/Button';
+import Input from '../ui/Input';
+import ErrorMessage from '../ui/ErrorMessage';
+import RegisterPasswordCondition from './RegisterPasswordCondition';
+
+// Firebase import
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase';
 
+// Libs import
+import { validateEmail, validateName, validateCountry, validatePassword } from '../../libs/auth';
+
 const FETCH_URL = 'https://react-traveller-app-default-rtdb.europe-west1.firebasedatabase.app/users.json';
-
-const validateEmail = email => {
-  if (email === '') return false;
-
-  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  const match = email.match(emailRegex);
-
-  return match ? true : false;
-};
-
-const validateName = name => {
-  return name.trim() !== '';
-};
-
-const validateCountry = country => {
-  return country !== '';
-};
-
-const validatePassword = password => {
-  if (password === '') return false;
-
-  const passwordRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})');
-  const match = password.match(passwordRegex);
-
-  return match ? true : false;
-};
 
 const RegisterPanel = () => {
   const { countries } = useContext(CountriesContext);
@@ -43,6 +27,19 @@ const RegisterPanel = () => {
   const navigate = useNavigate();
 
   const [countriesList, setCountriesList] = useState([]);
+
+  // Input error handling
+  const [emailError, setEmailError] = useState(null);
+  const [nameError, setNameError] = useState(null);
+  const [countryError, setCountryError] = useState(null);
+
+  const [passwordCorrect, setPasswordCorrect] = useState({
+    length: null,
+    uppercase: null,
+    lowercase: null,
+    digit: null,
+    specialCharacter: null,
+  });
 
   const emailRef = createRef();
   const nameRef = createRef();
@@ -58,21 +55,24 @@ const RegisterPanel = () => {
     const password = passwordRef.current.value.trim();
 
     const emailValid = validateEmail(email);
+    setEmailError(!emailValid ? 'Invalid email' : null);
+
     const nameValid = validateName(name);
+    setNameError(!nameValid ? 'Invalid name' : null);
+
     const countryValid = validateCountry(country);
-    const passwordValid = validatePassword(password);
+    setCountryError(!countryValid ? 'Invalid country' : null);
+
+    const passwordValid = Object.values(passwordCorrect).every(condition => condition === true);
 
     if (emailValid && nameValid && countryValid && passwordValid) {
-      let userId;
+      let user, userId;
 
       // Register data
       await createUserWithEmailAndPassword(auth, email, password)
         .then(userCredential => {
-          const user = userCredential.user;
+          user = userCredential.user;
           userId = user.uid;
-
-          authCtx.login(user);
-          navigate('/dashboard');
         })
         .catch(error => {
           const errorCode = error.code;
@@ -89,7 +89,15 @@ const RegisterPanel = () => {
         },
         body: JSON.stringify({ name: name, country: country, userId: userId }),
       });
+
+      authCtx.login(user);
+      navigate('/dashboard');
     }
+  };
+
+  const checkPassword = e => {
+    const passwordValid = validatePassword(e.target.value);
+    setPasswordCorrect(passwordValid);
   };
 
   useEffect(() => {
@@ -99,13 +107,15 @@ const RegisterPanel = () => {
 
   return (
     <form onSubmit={formSubmitHandler} className='w-full flex flex-col items-center mb-[30px]'>
-      <Input ref={emailRef} label='E-mail' id='email' type='text' className='mb-[20px]' />
-      <Input ref={nameRef} label='Name' id='name' type='text' className='mb-[20px]' />
-      <div className='w-full flex flex-col mb-[20px]'>
+      <Input ref={emailRef} label='E-mail' id='email' type='text' className={emailError ? 'mb-[10px]' : 'mb-[20px]'} />
+      {emailError && <ErrorMessage errorMessage={emailError} />}
+      <Input ref={nameRef} label='Name' id='name' type='text' className={nameError ? 'mb-[10px]' : 'mb-[20px]'} />
+      {nameError && <ErrorMessage errorMessage={nameError} />}
+      <div className={`w-full flex flex-col ${countryError ? 'mb-[10px]' : 'mb-[20px]'}`}>
         <label className='text-[14px] mb-[5px] pl-[5px]' htmlFor='name'>
           Country
         </label>
-        <select ref={countryRef} className='py-[5px] px-[10px] rounded-[8px]' required>
+        <select ref={countryRef} className='py-[5px] px-[10px] rounded-[8px]'>
           <option value=''>Choose country</option>
           {countriesList.map(country => (
             <option key={country} value={country}>
@@ -114,14 +124,22 @@ const RegisterPanel = () => {
           ))}
         </select>
       </div>
+      {countryError && <ErrorMessage errorMessage={countryError} />}
       <Input
         ref={passwordRef}
+        onChange={checkPassword}
         label='Password'
         id='password'
         type='password'
-        className='mb-[30px]'
-        additionalInfo='Password must contain at least 8 characters, lowercase letter, uppercase letter, digit and special character'
+        className='mb-[20px]'
       />
+      <div className='mb-[20px] w-full'>
+        <RegisterPasswordCondition isValid={passwordCorrect?.length} text='Minimum length of 8 characters' />
+        <RegisterPasswordCondition isValid={passwordCorrect?.uppercase} text='Uppercase letter' />
+        <RegisterPasswordCondition isValid={passwordCorrect?.lowercase} text='Lowercase letter' />
+        <RegisterPasswordCondition isValid={passwordCorrect?.digit} text='Digit' />
+        <RegisterPasswordCondition isValid={passwordCorrect?.specialCharacter} text='Special character' />
+      </div>
       <Button text='Submit' type='submit' />
     </form>
   );

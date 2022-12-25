@@ -1,4 +1,7 @@
+// Hooks, React import
 import { useState } from 'react';
+
+// Components import
 import Card from '../ui/Card';
 import LoginPanel from './LoginPanel';
 import RegisterPanel from './RegisterPanel';
