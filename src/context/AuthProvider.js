@@ -5,7 +5,9 @@ const getUserFromDatabse = async data => {
   const users = await fetch('https://react-traveller-app-default-rtdb.europe-west1.firebasedatabase.app/users.json');
   const usersData = await users.json();
 
-  const currentUser = usersData.find(user => user.userId === data);
+  const usersInfo = Object.values(usersData);
+  const currentUser = usersInfo.find(user => user.userId === data);
+
   return currentUser;
 };
 

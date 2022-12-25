@@ -21,7 +21,9 @@ const DashboardScoreboard = () => {
     sendRequest(
       { url: 'https://react-traveller-app-default-rtdb.europe-west1.firebasedatabase.app/users.json' },
       data => {
-        const sortedData = data.sort((a, b) => b.visitedCountries.length - a.visitedCountries.length);
+        const usersDataObject = Object.values(data);
+        const sortedData = usersDataObject.sort((a, b) => b.visitedCountries.length - a.visitedCountries.length);
+
         setScoreboard(sortedData);
       }
     );

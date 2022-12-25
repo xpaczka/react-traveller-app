@@ -1,6 +1,7 @@
-import { useRef, useState } from 'react';
+import { useState, createRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
+import Input from '../ui/Input';
 import { useContext } from 'react';
 import AuthContext from '../../context/auth-context';
 
@@ -24,14 +25,14 @@ const LoginPanel = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const emailRef = createRef();
+  const passwordRef = createRef();
 
   const formSubmitHandler = e => {
     e.preventDefault();
 
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+    const email = emailRef.current.value.trim();
+    const password = passwordRef.current.value.trim();
 
     signInWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
@@ -54,32 +55,8 @@ const LoginPanel = () => {
 
   return (
     <form onSubmit={formSubmitHandler} className='w-full flex flex-col items-center mb-[30px]'>
-      <div className='w-full flex flex-col mb-[20px]'>
-        <label className='text-[14px] mb-[5px] pl-[5px]' htmlFor='email'>
-          E-mail
-        </label>
-        <input
-          ref={emailRef}
-          type='text'
-          name='email'
-          id='email'
-          className='py-[5px] px-[10px] rounded-[8px]'
-          required
-        />
-      </div>
-      <div className='w-full flex flex-col mb-[40px]'>
-        <label className='text-[14px] mb-[5px] pl-[5px]' htmlFor='password'>
-          Password
-        </label>
-        <input
-          ref={passwordRef}
-          type='password'
-          name='password'
-          id='password'
-          className='py-[5px] px-[10px] rounded-[8px]'
-          required
-        />
-      </div>
+      <Input ref={emailRef} label='E-mail' id='email' type='text' className='mb-[20px]' />
+      <Input ref={passwordRef} label='Password' id='password' type='password' className='mb-[40px]' />
       {error && <p className='bg-[red] text-white py-[5px] px-[30px] mb-[10px] '>{error}</p>}
       <Button text='Submit' type='submit' />
     </form>
