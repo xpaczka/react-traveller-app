@@ -1,4 +1,7 @@
+// Hooks, React import
 import { useState, useEffect } from 'react';
+
+// Context import
 import AuthContext from './auth-context';
 
 const getUserFromDatabse = async data => {
@@ -34,6 +37,7 @@ const AuthProvider = props => {
     setToken(data.accessToken);
 
     const user = await getUserFromDatabse(data.uid);
+
     setCurrentUser(user);
   };
 

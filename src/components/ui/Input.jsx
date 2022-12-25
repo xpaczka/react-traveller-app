@@ -1,3 +1,4 @@
+// Hooks, React import
 import { forwardRef } from 'react';
 
 const Input = (props, ref) => {
@@ -8,13 +9,12 @@ const Input = (props, ref) => {
       </label>
       <input
         ref={ref}
+        onChange={props.onChange}
         type={props.type}
         name={props.id}
         id={props.id}
         className='py-[5px] px-[10px] rounded-[8px]'
-        required
       />
-      {props.additionalInfo && <p className='text-[14px] mt-[20px] text-center'>{props.additionalInfo}</p>}
     </div>
   );
 };

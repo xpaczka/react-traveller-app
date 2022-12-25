@@ -1,6 +1,8 @@
+// Hooks, React import
 import { useState, useEffect, useContext } from 'react';
 import useFetch from '../hooks/use-fetch';
 
+// Context import
 import CountriesContext from './countries-context';
 import AuthContext from './auth-context';
 

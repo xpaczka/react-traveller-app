@@ -1,3 +1,4 @@
+// Hooks, React import
 import { createContext } from 'react';
 
 const AuthContext = createContext({

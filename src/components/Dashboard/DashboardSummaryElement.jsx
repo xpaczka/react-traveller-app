@@ -1,4 +1,7 @@
+// Hooks, React import
 import { useContext } from 'react';
+
+// Context import
 import CountriesContext from '../../context/countries-context';
 
 const DashboardSummaryElement = props => {

@@ -1,4 +1,7 @@
+// Hooks, React import
 import { useContext, useEffect, useState } from 'react';
+
+// Context import
 import CountriesContext from '../../context/countries-context';
 
 const DashboardScoreboardListElement = ({ rank, name, country, countriesCount }) => {

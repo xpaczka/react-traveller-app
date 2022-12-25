@@ -1,7 +1,12 @@
+// Hooks, React import
 import { useState, useEffect, useContext } from 'react';
 import useFetch from '../../hooks/use-fetch';
+
+// Context import
 import CountriesContext from '../../context/countries-context';
 import AuthContext from '../../context/auth-context';
+
+// Components import
 import DashboardPanel from './DashboardPanel';
 import DashboardScoreboardProfile from './DashboardScoreboardProfile';
 import DashboardScoreboardListElement from './DashboardScoreboardListElement';
@@ -22,7 +27,7 @@ const DashboardScoreboard = () => {
       { url: 'https://react-traveller-app-default-rtdb.europe-west1.firebasedatabase.app/users.json' },
       data => {
         const usersDataObject = Object.values(data);
-        const sortedData = usersDataObject.sort((a, b) => b.visitedCountries.length - a.visitedCountries.length);
+        const sortedData = usersDataObject.sort((a, b) => b.visitedCountries?.length - a.visitedCountries?.length);
 
         setScoreboard(sortedData);
       }

@@ -1,6 +1,10 @@
+// Hooks, React import
 import { useContext, useState } from 'react';
-import icons from '../../assets/icons/_index';
 
+// Context import
+import AuthContext from '../../context/auth-context';
+
+// Components import
 import Card from '../ui/Card';
 import DashboardCountries from './DashboardCountries';
 import DashboardButton from './DashboardButton';
@@ -8,7 +12,9 @@ import DashboardHamburger from './DashboardHamburger';
 import DashboardScorebard from './DashboardScoreboard';
 import DashboardSummary from './DashboardSummary';
 import DashboardLogout from './DashboardLogout';
-import AuthContext from '../../context/auth-context';
+
+// Assets import
+import icons from '../../assets/icons/_index';
 
 const Dashboard = () => {
   const { logout } = useContext(AuthContext);
@@ -21,8 +27,8 @@ const Dashboard = () => {
   return (
     <>
       <div className='flex absolute right-[80px] top-[60px] z-[100]'>
-        <DashboardLogout onLogout={logout} className='mr-[20px]' />
-        <DashboardHamburger onMenuAction={toggleDashboardHandler} />
+        <DashboardLogout onLogout={logout} className={`mr-[20px] ${!dashboardOpen && 'bg-[lightgray]'}`} />
+        <DashboardHamburger onMenuAction={toggleDashboardHandler} className={!dashboardOpen && 'bg-[lightgray]'} />
       </div>
       {dashboardOpen && (
         <Card className='min-w-[320px] w-[640px] h-[90vh] overflow-hidden absolute right-[40px] top-[40px] bg-[rgba(255,255,255,0.8)] px-[40px] pt-[70px] pb-[20px]'>
