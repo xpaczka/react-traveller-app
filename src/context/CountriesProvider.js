@@ -1,16 +1,10 @@
-import { useState, useEffect, useReducer, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import useFetch from '../hooks/use-fetch';
 
 import CountriesContext from './countries-context';
 import AuthContext from './auth-context';
 
-const defaultCountriesState = {
-  countries: [],
-  continents: {},
-  countriesCount: 0,
-  visitedCountriesCount: 0,
-  visitedCountries: [],
-};
+const FETCH_URL = 'https://react-traveller-app-default-rtdb.europe-west1.firebasedatabase.app/users';
 
 const getContinentsLength = countries => {
   const countedContinents = {};
@@ -24,37 +18,33 @@ const getContinentsLength = countries => {
   return countedContinents;
 };
 
-const visitedReducer = (state, action) => {
-  switch (action.type) {
-    case 'ADD':
-      const countryVisited = state.visitedCountries.some(country => country.name === action.item.name);
-
-      if (!countryVisited) {
-        state.visitedCountries.push(action.item);
-      }
-
-      localStorage.setItem('visited', JSON.stringify(state.visitedCountries));
-
-      return state;
-    case 'REMOVE':
-      const countryIndex = state.visitedCountries.findIndex(country => country.name === action.item.name);
-      state.visitedCountries.splice(countryIndex, 1);
-
-      localStorage.setItem('visited', JSON.stringify(state.visitedCountries));
-
-      return state;
-    default:
-      return defaultCountriesState;
-  }
-};
-
 const CountriesProvider = props => {
   const { currentUser } = useContext(AuthContext);
 
   const [countries, setCountries] = useState([]);
-  const [countriesState, dispatchCountriesAction] = useReducer(visitedReducer, defaultCountriesState);
+  const [currentState, setCurrentState] = useState({ currentUserIndex: null, visitedCountriesState: [] });
+  const [visitedCountries, setVisitedCountries] = useState([]);
 
   const { sendRequest } = useFetch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchResponse = await fetch(`${FETCH_URL}.json`);
+      const data = await fetchResponse.json();
+      const userInfo = Object.values(data);
+
+      const currentUserIndex = userInfo.findIndex(user => user.userId === currentUser.userId);
+      const visitedCountriesState = userInfo[currentUserIndex].visitedCountries;
+
+      setCurrentState({
+        currentUserIndex: currentUserIndex,
+        visitedCountriesState: visitedCountriesState ? [...visitedCountriesState] : [],
+      });
+
+      setVisitedCountries(visitedCountriesState);
+    };
+    fetchData();
+  }, [currentUser.userId]);
 
   useEffect(() => {
     sendRequest({ url: 'https://restcountries.com/v3.1/all' }, data => {
@@ -63,15 +53,41 @@ const CountriesProvider = props => {
     });
   }, [sendRequest]);
 
-  const addCountryHandler = item => dispatchCountriesAction({ type: 'ADD', item: item });
-  const removeCountryHandler = item => dispatchCountriesAction({ type: 'REMOVE', item: item });
+  const addCountryHandler = async item => {
+    const directory = visitedCountries ? '/visitedCountries.json' : '.json';
+    const newState = visitedCountries ? [...visitedCountries, item] : [item];
+    const bodyData = visitedCountries ? newState : { ...currentUser, visitedCountries: newState };
+
+    await fetch(`${FETCH_URL}/${currentState.currentUserIndex}${directory}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+      body: JSON.stringify(bodyData),
+    });
+
+    setVisitedCountries(newState);
+  };
+
+  const removeCountryHandler = async item => {
+    const countryToBeRemovedIndex = visitedCountries.findIndex(country => country.name === item.name);
+    const newState = [...visitedCountries];
+
+    newState.splice(countryToBeRemovedIndex, 1);
+
+    fetch(`${FETCH_URL}/${currentState.currentUserIndex}/visitedCountries.json`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
+      body: JSON.stringify(newState),
+    });
+
+    setVisitedCountries(newState);
+  };
 
   const contextValue = {
     countries: countries,
     continents: getContinentsLength(countries),
-    visitedCountries: currentUser?.visitedCountries ?? [],
+    visitedCountries: visitedCountries ?? [],
     countriesCount: countries.length,
-    visitedCountriesCount: currentUser?.visitedCountries.length ?? 0,
+    visitedCountriesCount: visitedCountries ? visitedCountries.length : 0,
     addCountry: addCountryHandler,
     removeCountry: removeCountryHandler,
   };

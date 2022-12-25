@@ -8,7 +8,7 @@ import DashboardScoreboardListElement from './DashboardScoreboardListElement';
 
 const DashboardScoreboard = () => {
   const { currentUser } = useContext(AuthContext);
-  const { countries, countriesCount } = useContext(CountriesContext);
+  const { countries, countriesCount, visitedCountries } = useContext(CountriesContext);
 
   const [userData, setUserData] = useState(null);
   const [scoreboard, setScoreboard] = useState([]);
@@ -45,7 +45,7 @@ const DashboardScoreboard = () => {
         name={userData?.name ?? ''}
         rank={rank}
         flag={flagCode ?? 'pl'}
-        visitedCount={userData?.visitedCountries.length ?? 0}
+        visitedCount={visitedCountries.length ?? 0}
         countriesCount={countriesCount ?? 0}
       />
       <ol className='mt-[10px]'>
@@ -55,7 +55,7 @@ const DashboardScoreboard = () => {
             rank={index + 1}
             name={el.name}
             country={el.country}
-            countriesCount={el.visitedCountries.length}
+            countriesCount={el.visitedCountries?.length}
           />
         ))}
       </ol>
