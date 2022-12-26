@@ -1,5 +1,5 @@
 // Assets import
-import images from '../../assets/icons/_index';
+import images from '../../../assets/icons/_index';
 
 const DashboardCheckbox = props => {
   const containerClasses = `h-[24px] w-[24px] border border-solid border-black rounded-full relative flex items-center justify-center ${

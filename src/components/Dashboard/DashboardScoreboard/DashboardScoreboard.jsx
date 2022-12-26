@@ -1,15 +1,15 @@
 // Hooks, React import
 import { useState, useEffect, useContext } from 'react';
-import useFetch from '../../hooks/use-fetch';
+import useFetch from '../../../hooks/use-fetch';
 
 // Context import
-import CountriesContext from '../../context/countries-context';
-import AuthContext from '../../context/auth-context';
+import CountriesContext from '../../../context/countries-context';
+import AuthContext from '../../../context/auth-context';
 
 // Components import
-import DashboardPanel from './DashboardPanel';
 import DashboardScoreboardProfile from './DashboardScoreboardProfile';
 import DashboardScoreboardListElement from './DashboardScoreboardListElement';
+import DashboardPanel from '../DashboardUtils/DashboardPanel';
 
 const DashboardScoreboard = () => {
   const { currentUser } = useContext(AuthContext);

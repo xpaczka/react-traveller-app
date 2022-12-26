@@ -20,7 +20,10 @@ const useFetch = () => {
       }
 
       const response = await rawResponse.json();
-      applyData(response);
+
+      if (applyData) {
+        applyData(response);
+      }
     } catch (error) {
       setError(error.message || 'Something went wrong!');
     }

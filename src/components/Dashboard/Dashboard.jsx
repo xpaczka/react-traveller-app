@@ -6,12 +6,12 @@ import AuthContext from '../../context/auth-context';
 
 // Components import
 import Card from '../ui/Card';
-import DashboardCountries from './DashboardCountries';
-import DashboardButton from './DashboardButton';
-import DashboardHamburger from './DashboardHamburger';
-import DashboardScorebard from './DashboardScoreboard';
-import DashboardSummary from './DashboardSummary';
-import DashboardLogout from './DashboardLogout';
+import DashboardCountries from './DashboardCountries/DashboardCountries';
+import DashboardSummary from './DashboardSummary/DashboardSummary';
+import DashboardScorebard from './DashboardScoreboard/DashboardScoreboard';
+import DashboardButton from './DashboardUtils/DashboardButton';
+import DashboardHamburger from './DashboardUtils/DashboardHamburger';
+import DashboardLogout from './DashboardUtils/DashboardLogout';
 
 // Assets import
 import icons from '../../assets/icons/_index';

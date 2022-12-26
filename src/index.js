@@ -8,18 +8,16 @@ import { BrowserRouter } from 'react-router-dom';
 
 /* TODO
  -> [IMPORTANT] Map.jsx
- -> choose better color palette
- -> move VARIABLES to seperate folder
  -> add loading states where necessary
  -> add logout timeout
  -> search for refactoring opportunities
- -> replace vanilla fetch with custom 'useFetch' hook
  -> transfer login / register login to Login.jsx component
  -> responsive web design
- -> improve components folder structure
  -> add logo (app and login pages)
  -> add already exisiting email error
  -> clear all button (set user's visitedCountries to empty)
+ -> replace CountriesContext with react-redux
+ -> [EXTRA] choose better color palette
  -> [EXTRA] create admin panel for handling database issues programatically (cleaning databse, removing users, etc.)
 */
 
