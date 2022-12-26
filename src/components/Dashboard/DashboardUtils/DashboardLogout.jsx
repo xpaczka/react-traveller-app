@@ -2,10 +2,10 @@
 import { useContext } from 'react';
 
 // Context import
-import AuthContext from '../../context/auth-context';
+import AuthContext from '../../../context/auth-context';
 
 // Assets import
-import icons from '../../assets/icons/_index';
+import icons from '../../../assets/icons/_index';
 
 const DashboardLogout = props => {
   const { currentUser } = useContext(AuthContext);

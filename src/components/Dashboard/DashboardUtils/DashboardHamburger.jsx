@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 // Assets import
-import icons from '../../assets/icons/_index';
+import icons from '../../../assets/icons/_index';
 
 const DashboardHamburger = props => {
   const [menuActive, setMenuActive] = useState(false);

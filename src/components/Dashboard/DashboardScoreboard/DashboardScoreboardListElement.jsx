@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from 'react';
 
 // Context import
-import CountriesContext from '../../context/countries-context';
+import CountriesContext from '../../../context/countries-context';
 
 const DashboardScoreboardListElement = ({ rank, name, country, countriesCount }) => {
   const { countries } = useContext(CountriesContext);

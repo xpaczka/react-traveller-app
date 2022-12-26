@@ -2,7 +2,7 @@
 import { useContext } from 'react';
 
 // Context import
-import CountriesContext from '../../context/countries-context';
+import CountriesContext from '../../../context/countries-context';
 
 const DashboardSummaryBar = () => {
   const { visitedCountriesCount, countriesCount } = useContext(CountriesContext);

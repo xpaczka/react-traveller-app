@@ -2,12 +2,12 @@
 import { useContext } from 'react';
 
 // Context import
-import CountriesContext from '../../context/countries-context';
+import CountriesContext from '../../../context/countries-context';
 
 // Components import
 import DashboardSummaryBar from './DashboardSummaryBar';
 import DashboardSummaryElement from './DashboardSummaryElement';
-import DashboardPanel from './DashboardPanel';
+import DashboardPanel from '../DashboardUtils/DashboardPanel';
 
 const DashboardSummary = () => {
   const { continents } = useContext(CountriesContext);

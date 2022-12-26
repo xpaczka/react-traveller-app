@@ -19,7 +19,8 @@ import { auth } from '../../firebase';
 // Libs import
 import { validateEmail, validateName, validateCountry, validatePassword } from '../../libs/auth';
 
-const FETCH_URL = 'https://react-traveller-app-default-rtdb.europe-west1.firebasedatabase.app/users.json';
+// Constants import
+import { FETCH_URL } from '../../constants';
 
 const RegisterPanel = () => {
   const { countries } = useContext(CountriesContext);
@@ -82,7 +83,7 @@ const RegisterPanel = () => {
         });
 
       // Create object in database
-      await fetch(FETCH_URL, {
+      await fetch(`${FETCH_URL}.json`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

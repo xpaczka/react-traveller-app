@@ -2,10 +2,10 @@
 import { useContext, useEffect, useState } from 'react';
 
 // Context import
-import CountriesContext from '../../context/countries-context';
+import CountriesContext from '../../../context/countries-context';
 
 // Components import
-import DashboardCheckbox from './DashboardCheckbox';
+import DashboardCheckbox from '../DashboardUtils/DashboardCheckbox';
 
 const DashboardCountriesElement = ({ name, code }) => {
   const [checked, setChecked] = useState(false);
