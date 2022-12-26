@@ -1,8 +1,5 @@
 const DashboardButton = props => {
-  const buttonClickHandler = () => {
-    props.onTabChange(props.value);
-  };
-
+  const buttonClickHandler = () => props.onTabChange(props.value);
   const buttonClasses = `flex-1 flex justify-center items-center px-[30px] py-[10px] bg-[#ff971a] rounded-[8px] cursor-pointer ${props.className}`;
 
   return (

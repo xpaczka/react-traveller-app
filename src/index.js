@@ -9,7 +9,6 @@ import { BrowserRouter } from 'react-router-dom';
 /* TODO
  -> [IMPORTANT] Map.jsx
  -> choose better color palette
- -> move countries list do databse / develope own api (exclude 'non-countries', should be left with 197 countries)
  -> move VARIABLES to seperate folder
  -> add loading states where necessary
  -> add logout timeout
@@ -19,6 +18,8 @@ import { BrowserRouter } from 'react-router-dom';
  -> responsive web design
  -> improve components folder structure
  -> add logo (app and login pages)
+ -> add already exisiting email error
+ -> clear all button (set user's visitedCountries to empty)
  -> [EXTRA] create admin panel for handling database issues programatically (cleaning databse, removing users, etc.)
 */
 
