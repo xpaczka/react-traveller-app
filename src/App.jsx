@@ -5,16 +5,13 @@ import AuthContext from './context/auth-context';
 import { useContext } from 'react';
 
 const App = () => {
-  const authCtx = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
 
   return (
     <Routes>
-      {!authCtx.isLoggedIn && <Route path='/' index element={<LoginPage />} />}
-      {authCtx.isLoggedIn && <Route path='/dashboard' element={<AppPage />} />}
-      <Route
-        path='*'
-        element={authCtx.isLoggedIn ? <Navigate replace to='/dashboard' /> : <Navigate replace to='/' />}
-      />
+      {!isLoggedIn && <Route path='/' index element={<LoginPage />} />}
+      {isLoggedIn && <Route path='/dashboard' element={<AppPage />} />}
+      <Route path='*' element={isLoggedIn ? <Navigate replace to='/dashboard' /> : <Navigate replace to='/' />} />
     </Routes>
   );
 };

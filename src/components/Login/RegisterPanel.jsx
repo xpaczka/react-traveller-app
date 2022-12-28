@@ -12,19 +12,12 @@ import Input from '../ui/Input';
 import ErrorMessage from '../ui/ErrorMessage';
 import RegisterPasswordCondition from './RegisterPasswordCondition';
 
-// Firebase import
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase';
-
 // Libs import
-import { validateEmail, validateName, validateCountry, validatePassword } from '../../libs/auth';
+import { validateEmail, validateName, validateCountry, validatePassword } from '../../libs/auth/validation';
 
-// Constants import
-import { FETCH_URL } from '../../constants';
-
-const RegisterPanel = () => {
+const RegisterPanel = props => {
   const { countries } = useContext(CountriesContext);
-  const authCtx = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [countriesList, setCountriesList] = useState([]);
@@ -67,32 +60,8 @@ const RegisterPanel = () => {
     const passwordValid = Object.values(passwordCorrect).every(condition => condition === true);
 
     if (emailValid && nameValid && countryValid && passwordValid) {
-      let user, userId;
-
-      // Register data
-      await createUserWithEmailAndPassword(auth, email, password)
-        .then(userCredential => {
-          user = userCredential.user;
-          userId = user.uid;
-        })
-        .catch(error => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-
-          console.error(`${errorCode}: ${errorMessage}`);
-        });
-
-      // Create object in database
-      await fetch(`${FETCH_URL}.json`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name: name, country: country, userId: userId }),
-      });
-
-      authCtx.login(user);
-      navigate('/dashboard');
+      const bodyData = { name: name, country: country };
+      props.onRegister(email, password, login, navigate, bodyData);
     }
   };
 

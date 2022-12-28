@@ -10,23 +10,8 @@ import Button from '../ui/Button';
 import Input from '../ui/Input';
 import ErrorMessage from '../ui/ErrorMessage';
 
-// Firebase import
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase';
-
-const displayErrorMessage = errorCode => {
-  switch (errorCode) {
-    case 'auth/invalid-email':
-      return 'Invalid email';
-    case 'auth/wrong-password':
-      return 'Wrong password';
-    default:
-      return 'Wrong email and password combination';
-  }
-};
-
-const LoginPanel = () => {
-  const authCtx = useContext(AuthContext);
+const LoginPanel = props => {
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [error, setError] = useState(null);
 
@@ -39,23 +24,7 @@ const LoginPanel = () => {
     const email = emailRef.current.value.trim();
     const password = passwordRef.current.value.trim();
 
-    signInWithEmailAndPassword(auth, email, password)
-      .then(userCredential => {
-        const user = userCredential.user;
-        authCtx.login(user);
-
-        setError(null);
-        navigate('/dashboard');
-      })
-      .catch(error => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        const errorText = displayErrorMessage(errorCode);
-        setError(errorText);
-
-        console.error(`${errorCode}: ${errorMessage}`);
-      });
+    props.onLogin(email, password, login, setError, navigate);
   };
 
   return (
