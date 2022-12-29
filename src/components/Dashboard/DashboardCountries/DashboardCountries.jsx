@@ -33,7 +33,7 @@ const DashboardCountries = () => {
   return (
     <>
       <DashboardCountriesSearchBar onSearchInput={searchInputHandler} />
-      <DashboardPanel>
+      <DashboardPanel className='h-[calc(100%-140px)]'>
         {countriesList.length ? (
           countriesListContent
         ) : (

@@ -47,7 +47,7 @@ const DashboardScoreboard = () => {
   }, [currentUser, countries, userData, scoreboard]);
 
   return (
-    <DashboardPanel>
+    <DashboardPanel className='h-[calc(100%-70px)]'>
       <DashboardScoreboardProfile
         name={userData?.name ?? ''}
         rank={rank}

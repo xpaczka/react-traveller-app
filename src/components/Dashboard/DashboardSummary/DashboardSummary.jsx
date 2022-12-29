@@ -14,7 +14,7 @@ const DashboardSummary = () => {
   const continentsElements = Object.entries(continents);
 
   return (
-    <DashboardPanel className='relative'>
+    <DashboardPanel className='relative h-[calc(100%-70px)]'>
       <DashboardSummaryBar />
       <div className='flex flex-wrap items-start'>
         {continentsElements.map(continent => (

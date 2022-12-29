@@ -5,7 +5,7 @@ import { useState } from 'react';
 import icons from '../../../assets/icons/_index';
 
 const DashboardHamburger = props => {
-  const [menuActive, setMenuActive] = useState(false);
+  const [menuActive, setMenuActive] = useState(true);
 
   const toggleMenuHandler = () => {
     setMenuActive(!menuActive);

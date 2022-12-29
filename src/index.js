@@ -9,6 +9,9 @@ import { BrowserRouter } from 'react-router-dom';
 /* TODO
  -> [IMPORTANT] Map.jsx
  -> [IMPORTANT] replace CountriesContext with react-redux
+ -> [IMPORTANT] add 'want to visit' function
+ -> [IMPORTANT] fix countries list not updating when removing country on map click (only works on re-render)
+ -> change DashboardSummary circle (display continent image)
  -> add loading states where necessary
  -> add logout timeout
  -> refactor where possible
@@ -16,9 +19,7 @@ import { BrowserRouter } from 'react-router-dom';
  -> add logo (app and login pages)
  -> add already exisiting email error
  -> clear all button (set user's visitedCountries to empty)
- -> fix scrolling issue on DashboardCountries
  -> fix issue with rendering searchbar while changing to summary
- -> [EXTRA] choose better color palette
  -> [EXTRA] create admin panel for handling database issues programatically (cleaning databse, removing users, etc.)
 */
 
