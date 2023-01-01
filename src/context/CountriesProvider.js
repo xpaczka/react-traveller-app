@@ -30,6 +30,17 @@ const CountriesProvider = props => {
 
   const { sendRequest } = useFetch();
 
+  // Get all countries
+  useEffect(() => {
+    sendRequest({ url: 'https://restcountries.com/v3.1/all' }, countryData => {
+      const filteredData = countryData.filter(country => COUNTRIES_LIST.includes(country.name.common));
+      const sortedData = filteredData.sort((a, b) => a.name.common > b.name.common);
+
+      setCountries(sortedData);
+    });
+  }, [sendRequest]);
+
+  // Get visited countries
   useEffect(() => {
     const fetchData = async () => {
       const fetchResponse = await fetch(`${FETCH_URL}.json`);
@@ -52,15 +63,6 @@ const CountriesProvider = props => {
     };
     fetchData();
   }, [currentUser]);
-
-  useEffect(() => {
-    sendRequest({ url: 'https://restcountries.com/v3.1/all' }, countryData => {
-      const filteredData = countryData.filter(country => COUNTRIES_LIST.includes(country.name.common));
-      const sortedData = filteredData.sort((a, b) => a.name.common > b.name.common);
-
-      setCountries(sortedData);
-    });
-  }, [sendRequest]);
 
   const addCountryHandler = async item => {
     const directory = visitedCountries ? '/visitedCountries.json' : '.json';

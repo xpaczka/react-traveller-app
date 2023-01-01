@@ -11,7 +11,6 @@ import { BrowserRouter } from 'react-router-dom';
  -> [IMPORTANT] replace CountriesContext with react-redux
  -> [IMPORTANT] add 'want to visit' function
  -> [IMPORTANT] fix countries list not updating when removing country on map click (only works on re-render)
- -> change DashboardSummary circle (display continent image)
  -> add loading states where necessary
  -> add logout timeout
  -> refactor where possible

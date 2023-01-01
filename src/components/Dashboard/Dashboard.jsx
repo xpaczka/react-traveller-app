@@ -18,7 +18,7 @@ import icons from '../../assets/icons/_index';
 
 const Dashboard = () => {
   const { logout } = useContext(AuthContext);
-  const [dashboardOpen, setDashboardOpen] = useState(false);
+  const [dashboardOpen, setDashboardOpen] = useState(true);
   const [currentTab, setCurrentTab] = useState(0);
 
   const toggleDashboardHandler = value => setDashboardOpen(!dashboardOpen);

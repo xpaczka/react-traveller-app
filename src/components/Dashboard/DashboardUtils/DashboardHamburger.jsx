@@ -20,7 +20,7 @@ const DashboardHamburger = props => {
       onClick={toggleMenuHandler}
     >
       <img
-        src={menuActive ? icons.bars : icons.xmark}
+        src={!menuActive ? icons.bars : icons.xmark}
         alt='Dashboard Hamburger'
         className='w-[24px] h-[24px] object-contain'
       />

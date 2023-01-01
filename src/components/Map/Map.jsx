@@ -5,7 +5,7 @@ import { useContext, useEffect } from 'react';
 import CountriesContext from '../../context/countries-context';
 
 // Libs import
-import { fillVistedCountries, setCountryStatus } from '../../libs/am5';
+import { fillVistedCountries, setCountryStatus, getCurrentLocation } from '../../libs/am5';
 
 // am5Charts import
 import * as am5 from '@amcharts/amcharts5';
@@ -13,9 +13,7 @@ import * as am5map from '@amcharts/amcharts5/map';
 import am5geodata_worldLow from '@amcharts/amcharts5-geodata/worldLow';
 
 /* TODO
-   -> adjust zoom levels
-   -> zoom into current location and select current country
-   -> show country info after clicking on map
+   -> zoom into current location and select current country (prevent reloading map on visitedCountries state change)
    -> adjust map to fit full screen
   */
 
@@ -36,8 +34,13 @@ const Map = () => {
       setCountryStatus(e, countries, visitedCountries, addCountry, removeCountry)
     );
 
-    const visitedCountriesData = fillVistedCountries(countries, visitedCountries);
-    worldSeries.data.setAll(visitedCountriesData);
+    (async () => {
+      const visitedCountriesData = await fillVistedCountries(countries, visitedCountries);
+      worldSeries.data.setAll(visitedCountriesData);
+
+      const coords = await getCurrentLocation();
+      chart.zoomToGeoPoint(coords, 10);
+    })();
 
     return () => root.dispose();
   }, [countries, visitedCountries, addCountry, removeCountry]);
